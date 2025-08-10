@@ -18,7 +18,7 @@ jobs:
       uses: actions/setup-dotnet@v4
       with:
         dotnet-version: 8.0.x
-        project: src/GildedRose.Core
+        project: src/GildedRose.Core.csproj
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
