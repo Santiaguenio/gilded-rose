@@ -1,0 +1,56 @@
+name: CodeQL
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  schedule:
+    - cron: "0 3 * * 1" # escaneo semanal (opcional)
+
+permissions:
+  contents: read
+  actions: read
+  security-events: write # necesario para subir resultados
+
+jobs:
+  analyze:
+    name: CodeQL Analyze
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src # tu .sln está en src/
+    strategy:
+      fail-fast: false
+      matrix:
+        language: ["csharp"]
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: 8.0.x
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: ${{ matrix.language }}
+          # Para .NET, probá primero con autobuild:
+          build-mode: autobuild
+
+      # Si el autobuild falla, reemplazá el paso anterior por init sin build-mode
+      # y agregá estos dos pasos manuales:
+      # - uses: github/codeql-action/init@v3
+      #   with:
+      #     languages: ${{ matrix.language }}
+      # - name: Build (manual)
+      #   run: |
+      #     dotnet restore
+      #     dotnet build -c Release
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+        with:
+          category: "/language:${{ matrix.language }}"
