@@ -1,15 +1,17 @@
 name: CodeQL
 
 on:
+  push:
+    branches: ["main"]
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
   schedule:
-    - cron: "0 3 * * 1"         # escaneo semanal (opcional)
+    - cron: "0 3 * * 1" # escaneo semanal (opcional)
 
 permissions:
   contents: read
   actions: read
-  security-events: write         # necesario para subir resultados
+  security-events: write # necesario para subir resultados
 
 jobs:
   analyze:
@@ -17,11 +19,11 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: src   # tu .sln está en src/
+        working-directory: src # tu .sln está en src/
     strategy:
       fail-fast: false
       matrix:
-        language: [ "csharp" ]
+        language: ["csharp"]
 
     steps:
       - uses: actions/checkout@v4
