@@ -1,4 +1,4 @@
-﻿using GildedRoseKata;
+﻿using GildedRose.Core;
 using System;
 using System.IO;
 using System.Text;
@@ -14,7 +14,7 @@ public class ApprovalTest
     public Task Foo()
     {
         Item[] items = { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-        GildedRose app = new GildedRose(items);
+        var app = new GildedRose.Core.GildedRose(items);
         app.UpdateQuality();
 
         return Verifier.Verify(items);

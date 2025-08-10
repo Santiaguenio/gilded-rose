@@ -18,7 +18,7 @@
         </PackageReference>
     </ItemGroup>
     <ItemGroup>
-      <ProjectReference Include="..\src\GildedRose.csproj" />
+      <ProjectReference Include="..\src\Core\GildedRose.Core.csproj" />
     </ItemGroup>
 
 </Project>
