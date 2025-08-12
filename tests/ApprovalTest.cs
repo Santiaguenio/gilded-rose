@@ -1,4 +1,5 @@
 ﻿using GildedRose.Core;
+using GildedRose.Core.Items;
 using System;
 using System.IO;
 using System.Text;
@@ -6,15 +7,15 @@ using System.Threading.Tasks;
 using VerifyXunit;
 using Xunit;
 
-namespace GildedRoseTests;
+namespace GildedRose.Tests;
 
 public class ApprovalTest
 {
     [Fact]
     public Task Foo()
     {
-        Item[] items = { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-        var app = new GildedRose.Core.GildedRose(items);
+        Item[] items = { new() { Name = "foo", SellIn = 0, Quality = 0 } };
+        var app = new Core.GildedRose(items, new ItemTypeFactory([new NormalItem { Name = "foo" }]));
         app.UpdateQuality();
 
         return Verifier.Verify(items);

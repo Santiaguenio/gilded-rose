@@ -1,17 +1,18 @@
 ﻿using GildedRose.Core;
+using GildedRose.Core.Items;
 using System.Collections.Generic;
 using Xunit;
 
-namespace GildedRoseTests;
+namespace GildedRose.Tests;
 
 public class GildedRoseTest
 {
     [Fact]
     public void foo()
     {
-        IList<Item> Items = new List<Item> { new Item { Name = "foo", SellIn = 0, Quality = 0 } };
-        var app = new GildedRose.Core.GildedRose(Items);
+        var items = new List<Item> { new() { Name = "foo", SellIn = 0, Quality = 0 } };
+        var app = new Core.GildedRose(items, new ItemTypeFactory([new NormalItem { Name = "foo" }]));
         app.UpdateQuality();
-        Assert.Equal("foo", Items[0].Name);
+        Assert.Equal("foo", items[0].Name);
     }
 }

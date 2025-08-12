@@ -1,5 +1,8 @@
-﻿using System;
+﻿using GildedRose.Core.Items;
+using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace GildedRose.Core;
 
@@ -9,7 +12,22 @@ public class Program
     {
         Console.WriteLine("OMGHAI!");
 
-        IList<Item> items = new List<Item>
+        var services = new ServiceCollection();
+
+        var knownItems = typeof(IUpdatable).Assembly
+            .Modules
+            .SelectMany(a => a.GetTypes())
+            .Where(t => !t.IsAbstract && !t.IsInterface && typeof(IUpdatable).IsAssignableFrom(t));
+
+        foreach (var knownItem in knownItems)
+        {
+            services.AddTransient(typeof(IUpdatable), knownItem);
+        }
+
+        services.AddScoped<ItemTypeFactory>();
+        var builtServices = services.BuildServiceProvider();
+
+        var items = new List<Item>
         {
             new Item {Name = "+5 Dexterity Vest", SellIn = 10, Quality = 20},
             new Item {Name = "Aged Brie", SellIn = 2, Quality = 0},
@@ -38,7 +56,7 @@ public class Program
             new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
         };
 
-        var app = new GildedRose(items);
+        var app = new GildedRose(items, builtServices.GetRequiredService<ItemTypeFactory>());
 
         int days = 2;
         if (args.Length > 0)
@@ -55,6 +73,7 @@ public class Program
                 Console.WriteLine(items[j].Name + ", " + items[j].SellIn + ", " + items[j].Quality);
             }
             Console.WriteLine("");
+
             app.UpdateQuality();
         }
     }
