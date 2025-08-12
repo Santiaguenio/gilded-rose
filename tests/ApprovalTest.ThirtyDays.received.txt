@@ -179,7 +179,6 @@ Backstage passes to a TAFKAL80ETC concert, -4, 0
 Backstage passes to a TAFKAL80ETC concert, -9, 0
 Conjured Mana Cake, -11, 0
 
-
 -------- day 15 --------
 name, sellIn, quality
 +5 Dexterity Vest, -5, 0

@@ -13,7 +13,6 @@ public class GildedRose(
         {
             var builtItem = itemBuilder.Build(items[i].Name);
             items[i] = builtItem.Update(items[i]);
-            continue;
         }
     }
 }

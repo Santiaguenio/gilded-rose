@@ -74,10 +74,6 @@ public class Program
             }
             Console.WriteLine("");
 
-            if (i == 14)
-            {
-                Console.WriteLine();
-            }
             app.UpdateQuality();
         }
     }
