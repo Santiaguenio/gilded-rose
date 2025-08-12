@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace GildedRose.Core.Items
 {
-    public class ItemBuilder(IEnumerable<IUpdatable> knownItems)
+    public class ItemTypeFactory(IEnumerable<IUpdatable> knownItems)
     {
         public IUpdatable Build(string itemName)
         {

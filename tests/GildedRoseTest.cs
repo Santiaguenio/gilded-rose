@@ -11,7 +11,7 @@ public class GildedRoseTest
     public void foo()
     {
         var items = new List<Item> { new() { Name = "foo", SellIn = 0, Quality = 0 } };
-        var app = new Core.GildedRose(items, new ItemBuilder([new NormalItem { Name = "foo" }]));
+        var app = new Core.GildedRose(items, new ItemTypeFactory([new NormalItem { Name = "foo" }]));
         app.UpdateQuality();
         Assert.Equal("foo", items[0].Name);
     }

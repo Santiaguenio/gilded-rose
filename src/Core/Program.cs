@@ -24,7 +24,7 @@ public class Program
             services.AddTransient(typeof(IUpdatable), knownItem);
         }
 
-        services.AddScoped<ItemBuilder>();
+        services.AddScoped<ItemTypeFactory>();
         var builtServices = services.BuildServiceProvider();
 
         var items = new List<Item>
@@ -56,7 +56,7 @@ public class Program
             new Item {Name = "Conjured Mana Cake", SellIn = 3, Quality = 6}
         };
 
-        var app = new GildedRose(items, builtServices.GetRequiredService<ItemBuilder>());
+        var app = new GildedRose(items, builtServices.GetRequiredService<ItemTypeFactory>());
 
         int days = 2;
         if (args.Length > 0)

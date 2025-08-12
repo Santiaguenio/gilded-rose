@@ -5,7 +5,7 @@ namespace GildedRose.Core;
 
 public class GildedRose(
     IList<Item> items,
-    ItemBuilder itemBuilder)
+    ItemTypeFactory itemBuilder)
 {
     public void UpdateQuality()
     {
