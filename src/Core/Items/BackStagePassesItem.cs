@@ -10,17 +10,17 @@
         {
             if (item.Quality < MAXIMUM_QUALITY_THRESHOLD)
             {
-                item.Quality += CalculateQualityAccordingToSellin(item);
+                item.Quality += CalculateQualityAccordingToSellIn(item);
             }
 
-            item.SellIn -= 1;
+            CheckNegativeSellIn(item);
 
             return item;
         }
 
-        private static int CalculateQualityAccordingToSellin(Item item)
+        private static int CalculateQualityAccordingToSellIn(Item item)
         {
-            if (item.SellIn == 0)
+            if (item.SellIn <= 0)
             {
                 return -item.Quality;
             }
@@ -32,12 +32,23 @@
 
             if (item.SellIn <= 10 && item.SellIn > 5)
             {
-                return item.Quality + 2 > MAXIMUM_QUALITY_THRESHOLD ? 1 : 2;
+                return item.Quality + 2 < MAXIMUM_QUALITY_THRESHOLD ? 2 : 1;
             }
 
-            return item.Quality + 3 > MAXIMUM_QUALITY_THRESHOLD ?
-                item.Quality + 2 > MAXIMUM_QUALITY_THRESHOLD ? 1 : 2 :
-                1;
+            return item.Quality + 3 <= MAXIMUM_QUALITY_THRESHOLD ? 
+                3 :
+                item.Quality + 2 < MAXIMUM_QUALITY_THRESHOLD ? 2 : 1;
+        }
+
+        private static int  CheckNegativeSellIn(Item item)
+        {
+            item.SellIn -= 1;
+            if (item.SellIn < 0)
+            {
+                return item.Quality -= item.Quality;
+            }
+
+            return item.Quality;
         }
     }
 }

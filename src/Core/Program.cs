@@ -74,7 +74,7 @@ public class Program
             }
             Console.WriteLine("");
 
-            if (i == 5)
+            if (i == 14)
             {
                 Console.WriteLine();
             }
