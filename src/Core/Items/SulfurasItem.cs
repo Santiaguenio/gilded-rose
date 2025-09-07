@@ -1,12 +1,11 @@
-﻿namespace GildedRose.Core.Items
-{
-    public class SulfurasItem : IItem, IUpdatable
-    {
-        public string Name => "Sulfuras";
+﻿namespace GildedRose.Core.Items;
 
-        public Item Update(Item item)
-        {
-            return item;
-        }
+public class SulfurasItem : IItem, IUpdatable
+{
+    public string Name => "Sulfuras";
+
+    public Item Update(Item item)
+    {
+        return item;
     }
 }

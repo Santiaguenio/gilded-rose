@@ -1,7 +1,6 @@
-﻿namespace GildedRose.Core.Items
+﻿namespace GildedRose.Core.Items;
+
+public interface IItem
 {
-    public interface IItem
-    {
-        string Name { get; }
-    }
+    string Name { get; }
 }

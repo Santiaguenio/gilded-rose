@@ -1,7 +1,6 @@
-﻿namespace GildedRose.Core.Items
+﻿namespace GildedRose.Core.Items;
+
+public interface IUpdatable : IItem
 {
-    public interface IUpdatable : IItem
-    {
-        Item Update(Item item);
-    }
+    Item Update(Item item);
 }
